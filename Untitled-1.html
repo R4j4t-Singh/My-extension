@@ -13,11 +13,11 @@
       window.Buffer = buffer.Buffer; // getting this from buffer module for frontend.
 
       const domainName = "USD Coin (PoS)"; // put your token name
-      const domainVersion = "1"; // leave this to "1"
-      const chainId = 137; // this is for the chain's ID. value is 1 for remix
-      const contractAddress = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"; // Put the address here from remix
+    const domainVersion = "1"; // leave this to "1"
+    const chainId = `0x${(137).toString(16).padStart(64, "0")}`; // this is for the chain's ID. value is 1 for remix
+    const contractAddress = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174"; // Put the address here from remix
 
-      var account = null;
+    var account = null;
 
 //       const abi = [
 // 	{
@@ -372,19 +372,19 @@
 // 	}
 // ]
 
-      const domain = {
-        name: domainName,
-        version: domainVersion,
-        verifyingContract: contractAddress,
-        chainId,
-      };
+const domain = {
+      name: domainName,
+      version: domainVersion,
+      verifyingContract: contractAddress,
+      salt: chainId,
+    }
 
-      const domainType = [
-        { name: "name", type: "string" },
-        { name: "version", type: "string" },
-        { name: "chainId", type: "uint256" },
-        { name: "verifyingContract", type: "address" },
-      ];
+    const domainType = [
+      { name: 'name', type: 'string' },
+      { name: 'version', type: 'string' },
+      { name: 'verifyingContract', type: 'address' },
+      { name: 'salt', type: 'bytes32' },
+    ]
 
       const connect = async () => {
         // This helps connect webpage to wallet.
@@ -452,8 +452,8 @@
       async function main() {
         await connect();
 
-        const permit = await createPermit(
-          "0x6eA706acFA51DF9CFA70a8Ad8Eb64Fb22C0aa4d1",
+      const permit = await createPermit(
+          "0x0CA1caF038546b20380B2bd88fbcf604D5066628",
           2,
           0,
           2661766724
