@@ -1,0 +1,25 @@
+{
+  "name": "Injecta",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "description": "Injecting stuff",
+  "homepage_url": "http://danharper.me",
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+  },
+  "permissions": ["storage", "activeTab", "tabs"],
+  "web_accessible_resources": [
+    {
+      "resources": [ "inject.js" ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_scripts": [ 
+    {
+      "matches": ["<all_urls>"],
+      "js": ["src/runner.js"]
+    }
+  ]
+}
